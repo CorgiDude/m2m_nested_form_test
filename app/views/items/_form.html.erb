@@ -20,11 +20,12 @@
     <%= f.text_area :description %>
   </div>
   <div class="tags">
-  <%= f.fields_for :tags do |ff| %>
+  <%= f.fields_for :items_tags do |ff| %>
     <div class="tag">
       <%= ff.hidden_field :id %>
-      <%= ff.object.name %>
-      (x) <!-- delete, later -->
+      <%= ff.object.tag.name %>
+      <%= link_to '(x)', '#', :class => 'delete_tag' %>
+      <%= ff.hidden_field :_destroy, :value => '0' %>
     </div>
   <% end %>
   </div>
@@ -48,6 +49,11 @@ var tag_id = {
 };
 var tags = <%= @tags.each.map {|t| t.name }.to_s.html_safe %>;
 
+$('.delete_tag').click(function(e) {
+  $(this).parent().fadeOut();
+  $(this).next().val('1');
+});
+
 
 function build_new_tag_partial(user_tag)
 {
@@ -69,7 +75,7 @@ function build_tag_partial(user_tag)
   else
   {
     $element = $('<div class="tag jqce">'+
-      '<input type="hidden" name="item[tags_attributes]['+ tag_count + '][id]" value="'+ id + '">'
+      '<input type="hidden" name="item[items_tags_attributes]['+ tag_count + '][tag_id]" value="'+ id + '">'
       + user_tag +
       ' (x)</div>');
   }
