@@ -1,0 +1,96 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="tags">
+  <%= f.fields_for :tags do |ff| %>
+    <div class="tag">
+      <%= ff.hidden_field :id %>
+      <%= ff.object.name %>
+      (x) <!-- delete, later -->
+    </div>
+  <% end %>
+  </div>
+  <div class="field">
+    <%= text_field_tag 'new_tag' %>
+    <%= button_tag 'Add Tag', :id => 'add_tag' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+var tag_count = <%= @item.tags.count %>;
+var tag_id = {
+  <% @tags.each do |tag| %>
+    "<%= tag.name %>": <%= tag.id %>,
+  <% end %>
+    "": 0
+};
+var tags = <%= @tags.each.map {|t| t.name }.to_s.html_safe %>;
+
+
+function build_new_tag_partial(user_tag)
+{
+  return $('<div class="tag jqce">'+
+    '<input type="hidden" name="item[tags_attributes]['+ tag_count + '][name]" value="' + user_tag + '">'
+    + user_tag +
+    ' (x)</div>');
+}
+
+function build_tag_partial(user_tag)
+{
+  var id = tag_id[user_tag];
+  var $element;
+  
+  if(id == undefined)
+  {
+    $element = build_new_tag_partial(user_tag);
+  }
+  else
+  {
+    $element = $('<div class="tag jqce">'+
+      '<input type="hidden" name="item[tags_attributes]['+ tag_count + '][id]" value="'+ id + '">'
+      + user_tag +
+      ' (x)</div>');
+  }
+  
+  return $element;
+}
+
+
+
+$('#new_tag').autocomplete({
+  source: tags
+});
+
+
+$('#add_tag').click(function(event) {
+  var $partial = build_tag_partial($('#new_tag').val());
+  $('#new_tag').val('');
+  $('.tags').append($partial);
+  $partial.fadeIn();
+  tag_count += 1;
+  event.preventDefault();
+});
+
+</script>
