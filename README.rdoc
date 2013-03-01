@@ -6,11 +6,8 @@ nested, JavaScripted, Web 2.0-ish form with many-to-many relations in Rails.
 
 == Goals
 
-1. The ability to add existing Tags to an Item while creating or editing it with
-auto-completion.
-
-2. The ability to create a new Tag while creating or editing an Item, if it does
-not already exist.
+1. The ability to add existing Tags to an Item while creating or editing it with auto-completion.
+2. The ability to create a new Tag while creating or editing an Item, if it does not already exist.
 
 
 == Progress
