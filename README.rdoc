@@ -6,9 +6,10 @@ nested, JavaScripted, Web 2.0-ish form with many-to-many relations in Rails.
 
 == Goals
 
-# The ability to add existing Tags to an Item while creating or editing it with
+1. The ability to add existing Tags to an Item while creating or editing it with
 auto-completion.
-# The ability to create a new Tag while creating or editing an Item, if it does
+
+2. The ability to create a new Tag while creating or editing an Item, if it does
 not already exist.
 
 
@@ -24,8 +25,7 @@ not already exist.
 
 * Adding existing Tags to an Itme while creating/editing it.
 * * <tt>ActiveRecord::RecordNotFound</tt> when attempting to save.
-* * Probably because the way the JS is writing the hidden fields, it believes the
-tags are already part of the model.
+* * Probably because the way the JS is writing the hidden fields, it believes the tags are already part of the model.
 * Tag removal from a single item.
 * * How to destroy relationship without destroying the actual Tag model?
 * * Not finding anything online about this.
