@@ -7,15 +7,15 @@ nested, JavaScripted, Web 2.0-ish form with many-to-many relations in Rails.
 == Goals
 
 # The ability to add existing Tags to an Item while creating or editing it with
-  auto-completion.
+auto-completion.
 # The ability to create a new Tag while creating or editing an Item, if it does
-  not already exist.
+not already exist.
 
 
 == Progress
 
 * Autocompletion does work, though it's a fair bit ugly.
-** Could probably make the inline script into an .rjs file if I wanted.
+* * Could probably make the inline script into an .rjs file if I wanted.
 * The JS seems to work well enough, though there's some .. iffy stuff.
 * You can create new Tags while creating/editing an Item.
 
@@ -23,9 +23,9 @@ nested, JavaScripted, Web 2.0-ish form with many-to-many relations in Rails.
 == Not done
 
 * Adding existing Tags to an Itme while creating/editing it.
-** <tt>ActiveRecord::RecordNotFound</tt> when attempting to save.
-** Probably because the way the JS is writing the hidden fields, it believes the
-   tags are already part of the model.
+* * <tt>ActiveRecord::RecordNotFound</tt> when attempting to save.
+* * Probably because the way the JS is writing the hidden fields, it believes the
+tags are already part of the model.
 * Tag removal from a single item.
-** How to destroy relationship without destroying the actual Tag model?
-** Not finding anything online about this.
+* * How to destroy relationship without destroying the actual Tag model?
+* * Not finding anything online about this.
